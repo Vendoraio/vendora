@@ -1,124 +1,80 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Vendora</title>
+    <title>Vendora</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
 
-<style>
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f6f8;
-}
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+        }
 
-/* Navbar */
-.navbar {
-    background-color: white;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: 1px solid #ddd;
-}
+        button {
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
 
-/* Hero section */
-.hero {
-    text-align: center;
-    padding: 100px 20px;
-}
-
-.hero h1 {
-    font-size: 48px;
-    color: #111;
-}
-
-.hero p {
-    font-size: 20px;
-    color: #555;
-    margin-top: 10px;
-}
-
-/* Button */
-button {
-    background-color: black;
-    color: white;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 30px;
-}
-
-button:hover {
-    background-color: #333;
-}
-
-/* Form */
-#form {
-    display: none;
-    margin-top: 40px;
-}
-
-input {
-    padding: 12px;
-    margin: 10px;
-    width: 250px;
-    font-size: 16px;
-}
-
-</style>
-
+        #storeLink {
+            margin-top: 20px;
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body>
 
-<div class="navbar">
-Vendora
-</div>
+    <div class="container">
+        <h2>Create Your Store</h2>
 
-<div class="hero">
+        <input type="text" id="storeName" placeholder="Enter store name">
 
-<h1>Build your online store in minutes</h1>
+        <textarea id="products" placeholder="Enter products (one per line)
+Example:
+Nike Shoe - ₦20000
+Watch - ₦5000"></textarea>
 
-<p>Vendora helps vendors create and launch their store instantly.</p>
+        <button onclick="createStore()">Create Store</button>
 
-<button onclick="showForm()">Create Your Store</button>
+        <p id="storeLink"></p>
+    </div>
 
-<div id="form">
+    <script>
+        function createStore() {
 
-<input type="text" id="storeName" placeholder="Store Name"><br>
+            const storeName = document.getElementById("storeName").value;
+            const products = document.getElementById("products").value;
 
-<textarea id="products" placeholder="Enter products like this:
-Shoes - 15000
-Bag - 8000
-Watch - 12000" rows="6" cols="30"></textarea><br>
+            if (!storeName || !products) {
+                alert("Enter store name and products");
+                return;
+            }
 
-<button onclick="createStore()">Launch Store</button>
+            const encodedName = encodeURIComponent(storeName);
+            const encodedProducts = encodeURIComponent(products);
 
-</div>
+            const link = "store.html?name=" + encodedName + "&products=" + encodedProducts;
 
-</div>
-
-<script>
-
-function showForm() {
-    document.getElementById("form").style.display = "block";
-}
-
-function createStore() {
-
-    var storeName = document.getElementById("storeName").value;
-    var products = document.getElementById("products").value;
-
-var url = "store.html?name=" + encodeURIComponent(storeName)
-        + "&products=" + encodeURIComponent(products);
-
-    window.location.href = url;
-}
-
-
-</script>
+            document.getElementById("storeLink").innerHTML =
+                "Your Store Link:<br><a href='" + link + "' target='_blank'>" + link + "</a>";
+        }
+    </script>
 
 </body>
 </html>
-
-
