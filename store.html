@@ -1,64 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Vendora Store</title>
+    <title>Vendora Store</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-    text-align: center;
-    padding-top: 100px;
-}
+        .store-box {
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
 
-.store-box {
-    background: white;
-    padding: 30px;
-    width: 350px;
-    margin: auto;
-    border-radius: 10px;
-}
-</style>
-
+        .product {
+            background: #eee;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="store-box">
+    <div class="store-box">
+        <h2 id="storeTitle"></h2>
 
-<h1 id="storeTitle"></h1>
+        <div id="productList"></div>
+    </div>
 
-<p id="productTitle"></p>
+    <script>
 
-<p id="productPrice"></p>
+        const params = new URLSearchParams(window.location.search);
 
-</div>
+        const storeName = params.get("name");
+        const products = params.get("products");
 
-<script>
+        document.getElementById("storeTitle").innerText = storeName;
 
+        if (products) {
 
-const params = new URLSearchParams(window.location.search);
+            const decodedProducts = decodeURIComponent(products);
 
-const storeName = params.get("name");
-const products = params.get("products");
+            const items = decodedProducts.split("\n");
 
-document.getElementById("storeTitle").innerText = storeName;
+            items.forEach(item => {
 
-const productList = document.createElement("div");
+                const div = document.createElement("div");
 
-if (products) {
-    const items = products.split("\n");
+                div.className = "product";
 
-    items.forEach(item => {
-        const p = document.createElement("p");
-        p.innerText = item;
-        productList.appendChild(p);
-    });
+                div.innerText = item;
 
-    document.querySelector(".store-box").appendChild(productList);
-}
+                document.getElementById("productList").appendChild(div);
 
+            });
+
+        }
+
+    </script>
 
 </body>
 </html>
-
-
