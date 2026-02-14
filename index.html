@@ -4,23 +4,40 @@
 <title>Vendora</title>
 
 <style>
+
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
     background-color: #f4f6f8;
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Hero section */
+.hero {
     text-align: center;
-    padding-top: 100px;
+    padding: 100px 20px;
 }
 
-h1 {
+.hero h1 {
+    font-size: 48px;
     color: #111;
-    font-size: 42px;
 }
 
-p {
+.hero p {
+    font-size: 20px;
     color: #555;
-    font-size: 18px;
+    margin-top: 10px;
 }
 
+/* Button */
 button {
     background-color: black;
     color: white;
@@ -29,82 +46,57 @@ button {
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 button:hover {
     background-color: #333;
 }
 
+/* Form */
 #form {
     display: none;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 input {
-    padding: 10px;
+    padding: 12px;
     margin: 10px;
     width: 250px;
+    font-size: 16px;
 }
 
-#store {
-    display: none;
-    margin-top: 50px;
-    background: white;
-    padding: 20px;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-}
 </style>
 
 </head>
 <body>
 
-<h1>Vendora</h1>
-<p>The platform where vendors build their online store</p>
+<div class="navbar">
+Vendora
+</div>
+
+<div class="hero">
+
+<h1>Build your online store in minutes</h1>
+
+<p>Vendora helps vendors create and launch their store instantly.</p>
 
 <button onclick="showForm()">Create Your Store</button>
 
 <div id="form">
-    <h2>Create Your Store</h2>
 
-    <input type="text" id="storeName" placeholder="Enter Store Name"><br>
+<input type="text" id="storeName" placeholder="Store Name"><br>
 
-    <input type="text" id="productName" placeholder="Enter Product Name"><br>
+<input type="text" id="productName" placeholder="Product Name"><br>
 
-    <input type="number" id="price" placeholder="Enter Price"><br>
+<input type="number" id="price" placeholder="Price"><br>
 
-    <button onclick="createStore()">Create Store</button>
+<button onclick="createStore()">Launch Store</button>
+
 </div>
 
-<div id="store">
-    <h2 id="storeTitle"></h2>
-    <p id="productTitle"></p>
-    <p id="productPrice"></p>
 </div>
 
-<script>
-
-function showForm() {
-    document.getElementById("form").style.display = "block";
-}
-
-function createStore() {
-
-    var storeName = document.getElementById("storeName").value;
-    var productName = document.getElementById("productName").value;
-    var price = document.getElementById("price").value;
-
-    document.getElementById("storeTitle").innerText = storeName;
-    document.getElementById("productTitle").innerText = "Product: " + productName;
-    document.getElementById("productPrice").innerText = "Price: ₦" + price;
-
-    document.getElementById("store").style.display = "block";
-}
-
-</script>
 <script>
 
 function showForm() {
