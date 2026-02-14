@@ -109,14 +109,16 @@ function createStore() {
     var productName = document.getElementById("productName").value;
     var price = document.getElementById("price").value;
 
-    localStorage.setItem("storeName", storeName);
-    localStorage.setItem("productName", productName);
-    localStorage.setItem("price", price);
+    var url = "store.html?name=" + encodeURIComponent(storeName)
+            + "&product=" + encodeURIComponent(productName)
+            + "&price=" + encodeURIComponent(price);
 
-    window.location.href = "store.html";
+    window.location.href = url;
 }
+
 
 </script>
 
 </body>
 </html>
+
