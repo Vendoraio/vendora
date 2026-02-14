@@ -31,11 +31,18 @@ body {
 
 <script>
 
-document.getElementById("storeTitle").innerText = localStorage.getItem("storeName");
-document.getElementById("productTitle").innerText = "Product: " + localStorage.getItem("productName");
-document.getElementById("productPrice").innerText = "Price: ₦" + localStorage.getItem("price");
+const params = new URLSearchParams(window.location.search);
+
+const storeName = params.get("name");
+const productName = params.get("product");
+const price = params.get("price");
+
+document.getElementById("storeTitle").innerText = storeName;
+document.getElementById("productTitle").innerText = "Product: " + productName;
+document.getElementById("productPrice").innerText = "Price: ₦" + price;
 
 </script>
 
 </body>
 </html>
+
