@@ -1,0 +1,130 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Vendora</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    text-align: center;
+    padding-top: 100px;
+}
+
+h1 {
+    color: #111;
+    font-size: 42px;
+}
+
+p {
+    color: #555;
+    font-size: 18px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+#form {
+    display: none;
+    margin-top: 30px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+}
+
+#store {
+    display: none;
+    margin-top: 50px;
+    background: white;
+    padding: 20px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Vendora</h1>
+<p>The platform where vendors build their online store</p>
+
+<button onclick="showForm()">Create Your Store</button>
+
+<div id="form">
+    <h2>Create Your Store</h2>
+
+    <input type="text" id="storeName" placeholder="Enter Store Name"><br>
+
+    <input type="text" id="productName" placeholder="Enter Product Name"><br>
+
+    <input type="number" id="price" placeholder="Enter Price"><br>
+
+    <button onclick="createStore()">Create Store</button>
+</div>
+
+<div id="store">
+    <h2 id="storeTitle"></h2>
+    <p id="productTitle"></p>
+    <p id="productPrice"></p>
+</div>
+
+<script>
+
+function showForm() {
+    document.getElementById("form").style.display = "block";
+}
+
+function createStore() {
+
+    var storeName = document.getElementById("storeName").value;
+    var productName = document.getElementById("productName").value;
+    var price = document.getElementById("price").value;
+
+    document.getElementById("storeTitle").innerText = storeName;
+    document.getElementById("productTitle").innerText = "Product: " + productName;
+    document.getElementById("productPrice").innerText = "Price: ₦" + price;
+
+    document.getElementById("store").style.display = "block";
+}
+
+</script>
+<script>
+
+function showForm() {
+    document.getElementById("form").style.display = "block";
+}
+
+function createStore() {
+
+    var storeName = document.getElementById("storeName").value;
+    var productName = document.getElementById("productName").value;
+    var price = document.getElementById("price").value;
+
+    localStorage.setItem("storeName", storeName);
+    localStorage.setItem("productName", productName);
+    localStorage.setItem("price", price);
+
+    window.location.href = "store.html";
+}
+
+</script>
+
+</body>
+</html>

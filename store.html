@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vendora Store</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.store-box {
+    background: white;
+    padding: 30px;
+    width: 350px;
+    margin: auto;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="store-box">
+    <h1 id="storeTitle"></h1>
+    <p id="productTitle"></p>
+    <p id="productPrice"></p>
+</div>
+
+<script>
+
+document.getElementById("storeTitle").innerText = localStorage.getItem("storeName");
+document.getElementById("productTitle").innerText = "Product: " + localStorage.getItem("productName");
+document.getElementById("productPrice").innerText = "Price: ₦" + localStorage.getItem("price");
+
+</script>
+
+</body>
+</html>
