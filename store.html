@@ -35,18 +35,30 @@ body {
 
 <script>
 
+
 const params = new URLSearchParams(window.location.search);
 
 const storeName = params.get("name");
-const productName = params.get("product");
-const price = params.get("price");
+const products = params.get("products");
 
 document.getElementById("storeTitle").innerText = storeName;
-document.getElementById("productTitle").innerText = "Product: " + productName;
-document.getElementById("productPrice").innerText = "Price: ₦" + price;
 
-</script>
+const productList = document.createElement("div");
+
+if (products) {
+    const items = products.split("\n");
+
+    items.forEach(item => {
+        const p = document.createElement("p");
+        p.innerText = item;
+        productList.appendChild(p);
+    });
+
+    document.querySelector(".store-box").appendChild(productList);
+}
+
 
 </body>
 </html>
+
 
