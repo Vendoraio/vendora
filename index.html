@@ -87,9 +87,10 @@ Vendora
 
 <input type="text" id="storeName" placeholder="Store Name"><br>
 
-<input type="text" id="productName" placeholder="Product Name"><br>
-
-<input type="number" id="price" placeholder="Price"><br>
+<textarea id="products" placeholder="Enter products like this:
+Shoes - 15000
+Bag - 8000
+Watch - 12000" rows="6" cols="30"></textarea><br>
 
 <button onclick="createStore()">Launch Store</button>
 
@@ -106,12 +107,10 @@ function showForm() {
 function createStore() {
 
     var storeName = document.getElementById("storeName").value;
-    var productName = document.getElementById("productName").value;
-    var price = document.getElementById("price").value;
+    var products = document.getElementById("products").value;
 
-    var url = "store.html?name=" + encodeURIComponent(storeName)
-            + "&product=" + encodeURIComponent(productName)
-            + "&price=" + encodeURIComponent(price);
+var url = "store.html?name=" + encodeURIComponent(storeName)
+        + "&products=" + encodeURIComponent(products);
 
     window.location.href = url;
 }
@@ -121,4 +120,5 @@ function createStore() {
 
 </body>
 </html>
+
 
