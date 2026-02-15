@@ -1,69 +1,106 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
     <title>Vendora Store</title>
+    <meta charset="UTF-8">
+
     <style>
+
         body {
             font-family: Arial;
             background-color: #f4f4f4;
-            text-align: center;
+            padding: 20px;
         }
 
         .store-box {
             background: white;
             padding: 20px;
-            margin: 50px auto;
-            width: 300px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
+            max-width: 400px;
         }
 
         .product {
-            background: #eee;
+            background: #eeeeee;
             padding: 10px;
-            margin: 10px;
+            margin: 5px 0;
             border-radius: 5px;
         }
+
+        button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+
     </style>
+
 </head>
 <body>
 
-    <div class="store-box">
-        <h2 id="storeTitle"></h2>
+<div class="store-box">
 
-        <div id="productList"></div>
-    </div>
+    <h1 id="storeName"></h1>
 
-    <script>
+    <div id="productList"></div>
 
-        const params = new URLSearchParams(window.location.search);
+    <button id="orderBtn">Order on WhatsApp</button>
 
-        const storeName = params.get("name");
-        const products = params.get("products");
+</div>
 
-        document.getElementById("storeTitle").innerText = storeName;
+<script>
 
-        if (products) {
+const params = new URLSearchParams(window.location.search);
 
-            const decodedProducts = decodeURIComponent(products);
+const storeName = params.get("name");
+const products = params.get("products");
+const whatsapp = params.get("whatsapp");
 
-            const items = decodedProducts.split("\n");
+document.getElementById("storeName").innerText = storeName;
 
-            items.forEach(item => {
+const productList = document.getElementById("productList");
 
-                const div = document.createElement("div");
+if(products) {
 
-                div.className = "product";
+    const productArray = products.split(",");
 
-                div.innerText = item;
+    productArray.forEach(function(product) {
 
-                document.getElementById("productList").appendChild(div);
+        const div = document.createElement("div");
 
-            });
+        div.className = "product";
 
-        }
+        div.innerText = product.trim();
 
-    </script>
+        productList.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("orderBtn").onclick = function() {
+
+    const message =
+        "Hello, I want to order from " + storeName;
+
+    const url =
+        "https://wa.me/" + whatsapp
+        + "?text=" + encodeURIComponent(message);
+
+    window.open(url, "_blank");
+
+};
+
+</script>
 
 </body>
 </html>
