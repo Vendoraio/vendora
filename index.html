@@ -51,6 +51,7 @@
 <button onclick="createStore()">Create Store</button>
 
 <p id="storeLink"></p>
+<button onclick="openStore()">Open My Store</button>
 
 </div>
 
@@ -103,6 +104,31 @@ function loadSavedStore() {
 
     if(products)
         document.getElementById("products").value = products;
+}
+function openStore() {
+
+    const storeName = localStorage.getItem("storeName");
+    const whatsapp = localStorage.getItem("whatsapp");
+    const products = localStorage.getItem("products");
+
+    if(!storeName || !whatsapp || !products) {
+        alert("No store found. Create one first.");
+        return;
+    }
+
+    const basePath = window.location.pathname.substring(
+        0,
+        window.location.pathname.lastIndexOf("/") + 1
+    );
+
+    const link =
+        window.location.origin +
+        basePath +
+        "store.html?name=" + encodeURIComponent(storeName) +
+        "&products=" + encodeURIComponent(products) +
+        "&whatsapp=" + encodeURIComponent(whatsapp);
+
+    window.open(link, "_blank");
 }
 
 </script>
