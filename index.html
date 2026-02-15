@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
     <title>Vendora - Create Your Store</title>
@@ -21,7 +21,6 @@
     <button onclick="createStore()">Create Store</button>
 
     <h3 id="storeLink"></h3>
-
 <script>
 
 function createStore() {
@@ -35,23 +34,26 @@ function createStore() {
         return;
     }
 
-    var url =
+    var basePath = window.location.pathname;
+
+    if(!basePath.endsWith("/")) {
+        basePath = basePath.substring(0, basePath.lastIndexOf("/") + 1);
+    }
+
+    var fullLink =
+        window.location.origin +
+        basePath +
         "store.html?name=" + encodeURIComponent(storeName)
         + "&products=" + encodeURIComponent(products)
         + "&whatsapp=" + encodeURIComponent(whatsapp);
 
-    var fullLink =
-        window.location.origin +
-        window.location.pathname.replace("index.html","") +
-        url;
-
     document.getElementById("storeLink").innerHTML =
         "Your Store Link:<br><a href='" + fullLink + "' target='_blank'>" + fullLink + "</a>";
+
 }
 
 </script>
- 
 
+ 
 </body>
 </html>
-
