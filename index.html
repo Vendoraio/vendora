@@ -1,59 +1,111 @@
  <!DOCTYPE html>
 <html>
 <head>
-    <title>Vendora - Create Your Store</title>
+    <title>Vendora - Create Store</title>
     <meta charset="UTF-8">
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+
 </head>
 <body>
 
-    <h1>Create Your Store</h1>
+<div class="box">
 
-    <!-- Store Name -->
-    <input type="text" id="storeName" placeholder="Enter Store Name"><br><br>
+<h2>Vendora</h2>
 
-    <!-- WhatsApp Number -->
-    <input type="text" id="whatsapp" placeholder="Enter WhatsApp Number (2348012345678)"><br><br>
+<input id="storeName" placeholder="Store Name">
 
-    <!-- Products -->
-    <textarea id="products" placeholder="Enter products separated by comma. Example: Shoes, Bags, Watches"></textarea><br><br>
+<input id="whatsapp" placeholder="WhatsApp Number">
 
-    <!-- Create Store Button -->
-    <button onclick="createStore()">Create Store</button>
+<textarea id="products" placeholder="Products (comma separated)"></textarea>
 
-    <h3 id="storeLink"></h3>
+<button onclick="createStore()">Create Store</button>
+
+<p id="storeLink"></p>
+
+</div>
+
 <script>
+
+loadSavedStore();
 
 function createStore() {
 
-    var storeName = document.getElementById("storeName").value;
-    var products = document.getElementById("products").value;
-    var whatsapp = document.getElementById("whatsapp").value;
+    const storeName = document.getElementById("storeName").value;
+    const whatsapp = document.getElementById("whatsapp").value;
+    const products = document.getElementById("products").value;
 
-    if(storeName === "" || products === "" || whatsapp === "") {
-        alert("Please fill all fields");
+    if(!storeName || !whatsapp || !products) {
+        alert("Fill all fields");
         return;
     }
 
-    var basePath = window.location.pathname;
+    localStorage.setItem("storeName", storeName);
+    localStorage.setItem("whatsapp", whatsapp);
+    localStorage.setItem("products", products);
 
-    if(!basePath.endsWith("/")) {
-        basePath = basePath.substring(0, basePath.lastIndexOf("/") + 1);
-    }
+    const basePath = window.location.pathname.substring(
+        0,
+        window.location.pathname.lastIndexOf("/") + 1
+    );
 
-    var fullLink =
+    const link =
         window.location.origin +
         basePath +
-        "store.html?name=" + encodeURIComponent(storeName)
-        + "&products=" + encodeURIComponent(products)
-        + "&whatsapp=" + encodeURIComponent(whatsapp);
+        "store.html?name=" + encodeURIComponent(storeName) +
+        "&products=" + encodeURIComponent(products) +
+        "&whatsapp=" + encodeURIComponent(whatsapp);
 
     document.getElementById("storeLink").innerHTML =
-        "Your Store Link:<br><a href='" + fullLink + "' target='_blank'>" + fullLink + "</a>";
+        "<a href='" + link + "' target='_blank'>" + link + "</a>";
+}
 
+function loadSavedStore() {
+
+    const storeName = localStorage.getItem("storeName");
+    const whatsapp = localStorage.getItem("whatsapp");
+    const products = localStorage.getItem("products");
+
+    if(storeName)
+        document.getElementById("storeName").value = storeName;
+
+    if(whatsapp)
+        document.getElementById("whatsapp").value = whatsapp;
+
+    if(products)
+        document.getElementById("products").value = products;
 }
 
 </script>
 
- 
 </body>
 </html>
