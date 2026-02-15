@@ -40,13 +40,18 @@ function createStore() {
         + "&products=" + encodeURIComponent(products)
         + "&whatsapp=" + encodeURIComponent(whatsapp);
 
-    var fullLink = window.location.origin + "/" + url;
+    var fullLink =
+        window.location.origin +
+        window.location.pathname.replace("index.html","") +
+        url;
 
     document.getElementById("storeLink").innerHTML =
-        "Your Store Link:<br><a href='" + url + "' target='_blank'>" + fullLink + "</a>";
+        "Your Store Link:<br><a href='" + fullLink + "' target='_blank'>" + fullLink + "</a>";
 }
 
 </script>
+ 
 
 </body>
 </html>
+
