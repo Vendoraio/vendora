@@ -8,38 +8,47 @@
 
         body {
             font-family: Arial;
-            background-color: #f4f4f4;
+            background-color: #f4f6f8;
             padding: 20px;
         }
 
-        .store-box {
+        .store-container {
+            max-width: 500px;
+            margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
-            max-width: 400px;
+        }
+
+        .store-title {
+            text-align: center;
         }
 
         .product {
-            background: #eeeeee;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
         }
 
-        button {
-            background: green;
+        .product-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .order-btn {
+            background-color: #25D366;
             color: white;
             border: none;
-            padding: 15px;
-            margin-top: 15px;
-            cursor: pointer;
+            padding: 10px;
             width: 100%;
-            font-size: 16px;
+            cursor: pointer;
             border-radius: 5px;
+            font-size: 16px;
         }
 
-        button:hover {
-            background: darkgreen;
+        .order-btn:hover {
+            background-color: #1ebe5d;
         }
 
     </style>
@@ -47,13 +56,11 @@
 </head>
 <body>
 
-<div class="store-box">
+<div class="store-container">
 
-    <h1 id="storeName"></h1>
+    <h1 class="store-title" id="storeName"></h1>
 
     <div id="productList"></div>
-
-    <button id="orderBtn">Order on WhatsApp</button>
 
 </div>
 
@@ -75,30 +82,38 @@ if(products) {
 
     productArray.forEach(function(product) {
 
-        const div = document.createElement("div");
+        const productDiv = document.createElement("div");
+        productDiv.className = "product";
 
-        div.className = "product";
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "product-name";
+        nameDiv.innerText = product.trim();
 
-        div.innerText = product.trim();
+        const button = document.createElement("button");
+        button.className = "order-btn";
+        button.innerText = "Order on WhatsApp";
 
-        productList.appendChild(div);
+        button.onclick = function() {
+
+            const message =
+                "Hello, I want to order " + product.trim() +
+                " from " + storeName;
+
+            const url =
+                "https://wa.me/" + whatsapp +
+                "?text=" + encodeURIComponent(message);
+
+            window.open(url, "_blank");
+        };
+
+        productDiv.appendChild(nameDiv);
+        productDiv.appendChild(button);
+
+        productList.appendChild(productDiv);
 
     });
 
 }
-
-document.getElementById("orderBtn").onclick = function() {
-
-    const message =
-        "Hello, I want to order from " + storeName;
-
-    const url =
-        "https://wa.me/" + whatsapp
-        + "?text=" + encodeURIComponent(message);
-
-    window.open(url, "_blank");
-
-};
 
 </script>
 
