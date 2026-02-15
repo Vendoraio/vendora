@@ -116,6 +116,26 @@ if(products) {
 }
 
 </script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyA4zko3-PU0mCWnPlf7o5Retcb-nItea4w",
+    authDomain: "vendora-platform.firebaseapp.com",
+    databaseURL: "https://vendora-platform-default-rtdb.firebaseio.com",
+    projectId: "vendora-platform",
+    storageBucket: "vendora-platform.firebasestorage.app",
+    messagingSenderId: "766541696115",
+    appId: "1:766541696115:web:79c9c167d5475ef11dae06"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 
 </body>
 </html>
