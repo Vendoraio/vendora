@@ -1,80 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vendora</title>
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-
-        .container {
-            background: white;
-            padding: 20px;
-            margin: 50px auto;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-        }
-
-        input, textarea {
-            width: 90%;
-            padding: 10px;
-            margin: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        #storeLink {
-            margin-top: 20px;
-            word-break: break-all;
-        }
-    </style>
+    <title>Vendora - Create Your Store</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Create Your Store</h2>
+    <h1>Create Your Store</h1>
 
-        <input type="text" id="storeName" placeholder="Enter store name">
+    <!-- Store Name -->
+    <input type="text" id="storeName" placeholder="Enter Store Name"><br><br>
 
-        <textarea id="products" placeholder="Enter products (one per line)
-Example:
-Nike Shoe - ₦20000
-Watch - ₦5000"></textarea>
+    <!-- WhatsApp Number -->
+    <input type="text" id="whatsapp" placeholder="Enter WhatsApp Number (2348012345678)"><br><br>
 
-        <button onclick="createStore()">Create Store</button>
+    <!-- Products -->
+    <textarea id="products" placeholder="Enter products separated by comma. Example: Shoes, Bags, Watches"></textarea><br><br>
 
-        <p id="storeLink"></p>
-    </div>
+    <!-- Create Store Button -->
+    <button onclick="createStore()">Create Store</button>
 
-    <script>
-        function createStore() {
+    <h3 id="storeLink"></h3>
 
-            const storeName = document.getElementById("storeName").value;
-            const products = document.getElementById("products").value;
+<script>
 
-            if (!storeName || !products) {
-                alert("Enter store name and products");
-                return;
-            }
+function createStore() {
 
-            const encodedName = encodeURIComponent(storeName);
-            const encodedProducts = encodeURIComponent(products);
+    var storeName = document.getElementById("storeName").value;
+    var products = document.getElementById("products").value;
+    var whatsapp = document.getElementById("whatsapp").value;
 
-            const link = "store.html?name=" + encodedName + "&products=" + encodedProducts;
+    if(storeName === "" || products === "" || whatsapp === "") {
+        alert("Please fill all fields");
+        return;
+    }
 
-            document.getElementById("storeLink").innerHTML =
-                "Your Store Link:<br><a href='" + link + "' target='_blank'>" + link + "</a>";
-        }
-    </script>
+    var url =
+        "store.html?name=" + encodeURIComponent(storeName)
+        + "&products=" + encodeURIComponent(products)
+        + "&whatsapp=" + encodeURIComponent(whatsapp);
+
+    var fullLink = window.location.origin + "/" + url;
+
+    document.getElementById("storeLink").innerHTML =
+        "Your Store Link:<br><a href='" + url + "' target='_blank'>" + fullLink + "</a>";
+}
+
+</script>
 
 </body>
 </html>
